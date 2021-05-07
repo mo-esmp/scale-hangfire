@@ -72,7 +72,7 @@ namespace JobQueue.ConsumerService.HostedServices
             var client = new BackgroundJobClient();
             var state = new EnqueuedState(queueName);
 
-            foreach (var message in messages)
+            foreach (var message in messages.OrderBy(o => o.CreateDate))
             {
                 Expression<Action> action = queueName == "express"
                     ? () => MessageProcessor.ProcessExpressMessageAsync(message, message.MessageId)
