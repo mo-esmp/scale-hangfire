@@ -1,0 +1,30 @@
+version: '3.4'
+
+networks:
+  service_network:
+
+services:
+  consumerservice:
+    image: ${DOCKER_REGISTRY-}jobqueueconsumerservice
+    container_name: consumerservice
+    ports:
+      - 9000:80
+    networks:
+      - service_network
+    build:
+      context: .
+      dockerfile: JobQueue.ConsumerService/Dockerfile
+    environment:
+      - JobApi__BaseAddress=http://producerservice
+      - Hangfire__0__WorkerCount=10
+      - Hangfire__1__WorkerCount=5
+
+  producerservice:
+    image: ${DOCKER_REGISTRY-}jobqueueproducerservice
+    container_name: producerservice
+    build:
+      context: .
+      dockerfile: JobQueue.ProducerService/Dockerfile
+    networks:
+      - service_network
+
