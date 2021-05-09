@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobQueue.ConsumerService", 
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CF99D296-7E94-48C9-962C-A1D71620DB65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobQueue.WorkerService", "JobQueue.WorkerService\JobQueue.WorkerService.csproj", "{78629587-7459-4CB9-942C-55C73DF15523}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobQueue.Shared", "JobQueue.Shared\JobQueue.Shared.csproj", "{791364C9-CBF4-4D15-9C42-9DC91960DD5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{CF99D296-7E94-48C9-962C-A1D71620DB65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF99D296-7E94-48C9-962C-A1D71620DB65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF99D296-7E94-48C9-962C-A1D71620DB65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78629587-7459-4CB9-942C-55C73DF15523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78629587-7459-4CB9-942C-55C73DF15523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78629587-7459-4CB9-942C-55C73DF15523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78629587-7459-4CB9-942C-55C73DF15523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{791364C9-CBF4-4D15-9C42-9DC91960DD5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{791364C9-CBF4-4D15-9C42-9DC91960DD5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{791364C9-CBF4-4D15-9C42-9DC91960DD5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{791364C9-CBF4-4D15-9C42-9DC91960DD5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
