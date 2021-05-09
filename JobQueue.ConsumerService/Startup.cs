@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Polly;
 using Serilog;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 
@@ -17,11 +17,12 @@ namespace JobQueue.ConsumerService
 {
     public class Startup
     {
-        private readonly ILogger<Startup> _logger;
+        private static ConnectionMultiplexer Redis;
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Redis = ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnection"));
         }
 
         public IConfiguration Configuration { get; }
@@ -44,7 +45,7 @@ namespace JobQueue.ConsumerService
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
-                .UseInMemoryStorage());
+                .UseRedisStorage(Redis));
 
             var queueSettings = Configuration.GetSection("Hangfire").Get<List<HangfireQueueSetting>>();
             foreach (var setting in queueSettings)
