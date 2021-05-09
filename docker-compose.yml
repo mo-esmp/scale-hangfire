@@ -36,3 +36,14 @@ services:
     networks:
       - service_network
 
+  workerservice:
+    image: ${DOCKER_REGISTRY-}workerservice
+    networks:
+      - service_network
+    build:
+      context: .
+      dockerfile: JobQueue.WorkerService/Dockerfile
+    environment:
+      - ConnectionStrings__RedisConnection=redis:6379
+      - Hangfire__0__WorkerCount=10
+      - Hangfire__1__WorkerCount=5
