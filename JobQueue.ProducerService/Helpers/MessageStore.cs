@@ -1,4 +1,4 @@
-﻿using JobQueue.ProducerService.Models;
+﻿using JobQueue.Shared;
 using System.Collections.Generic;
 using System.Linq;
 

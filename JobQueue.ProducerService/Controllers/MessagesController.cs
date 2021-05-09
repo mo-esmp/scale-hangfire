@@ -1,4 +1,4 @@
-﻿using JobQueue.ProducerService.Models;
+﻿using JobQueue.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿using Hangfire;
 using Hangfire.States;
 using JobQueue.ConsumerService.HttpClients;
-using JobQueue.ConsumerService.Models;
+using JobQueue.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

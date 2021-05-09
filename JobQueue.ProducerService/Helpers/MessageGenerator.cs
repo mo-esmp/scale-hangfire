@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using JobQueue.ProducerService.Models;
+using JobQueue.Shared;
 using System;
 using System.Collections.Generic;
 

@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["JobQueue.ConsumerService/JobQueue.ConsumerService.csproj", "JobQueue.ConsumerService/"]
+COPY ["JobQueue.Shared/JobQueue.Shared.csproj", "JobQueue.Shared/"]
 RUN dotnet restore "JobQueue.ConsumerService/JobQueue.ConsumerService.csproj"
 COPY . .
 WORKDIR "/src/JobQueue.ConsumerService"

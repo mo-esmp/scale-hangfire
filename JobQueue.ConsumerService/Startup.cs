@@ -11,18 +11,16 @@ using Polly;
 using Serilog;
 using StackExchange.Redis;
 using System;
-using System.Collections.Generic;
 
 namespace JobQueue.ConsumerService
 {
     public class Startup
     {
-        private static ConnectionMultiplexer Redis;
+        private static ConnectionMultiplexer _redis;
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            Redis = ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnection"));
         }
 
         public IConfiguration Configuration { get; }
@@ -41,22 +39,13 @@ namespace JobQueue.ConsumerService
                 options.Timeout = TimeSpan.FromSeconds(5);
             }).AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(3, _ => TimeSpan.FromSeconds(4)));
 
+            _redis = ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnection"));
+
             services.AddHangfire(configuration => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
-                .UseRedisStorage(Redis));
-
-            var queueSettings = Configuration.GetSection("Hangfire").Get<List<HangfireQueueSetting>>();
-            foreach (var setting in queueSettings)
-            {
-                services.AddHangfireServer(options =>
-                {
-                    options.ServerName = $"{Environment.MachineName}:{setting.QueueName}";
-                    options.Queues = new[] { setting.QueueName };
-                    options.WorkerCount = setting.WorkerCount;
-                });
-            }
+                .UseRedisStorage(_redis));
 
             services.AddSwaggerGen(c =>
             {
@@ -89,12 +78,5 @@ namespace JobQueue.ConsumerService
                 });
             });
         }
-    }
-
-    public class HangfireQueueSetting
-    {
-        public string QueueName { get; set; }
-
-        public int WorkerCount { get; set; }
     }
 }
