@@ -1,4 +1,4 @@
-# job-queue-sample
+# Scale Hangfire with docker
 
 To run projects:
 * run `docker-compose build`
